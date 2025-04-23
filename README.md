@@ -87,6 +87,8 @@ Esta configuração nos proporciona a capacidade de fazer perguntas como esta:
    openssl rand -base64 2000 | tr -dc 'A-Z' | fold -w 128 | head -n 1
    ```
 
+   Copie a sequência de caracteres gerada e cole em **ENCRYPTION_SECRET** no arquivo **[.env](./.env)**
+
 4. Inicie o projeto rodando o comando:
 
    ```sh
