@@ -7,8 +7,8 @@ Marque com um "x" o tipo de mudança que este PR introduz:
 - [ ] [HOTFIX]: Correção de falha crítica em produção
 - [ ] [REFACTOR]: Refatoração de código
 - [ ] [DOCS]: Atualização de documentação
-- [ ] Outro (descreva abaixo)
+- [x] Outro (descreva abaixo)
 
 ## Descrição
 
-Descreva de forma clara e concisa o que este Pull Request faz.
+Insere toda a base de código do recém criado Oráculo.
