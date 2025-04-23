@@ -1,0 +1,126 @@
+{
+  "name": "oraculo_devlake",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "29d1dc3e-9c83-49fe-a2d5-fbf211317d3e",
+      "name": "When chat message received",
+      "webhookId": "ac2401ec-9322-48c8-995b-c6294822879d"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Você é um assistente que responde perguntas sobre os dados contidos no banco de dados MySQL da empresa.\nResponda de forma clara e precisa. Se não encontrar os dados, informe ao usuário."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        220,
+        0
+      ],
+      "id": "153f865f-ebe4-4183-b6b5-cead50a2a210",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        248,
+        220
+      ],
+      "id": "12e7bfa8-162c-476a-8f70-6ae8ee36180c",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "oc5vpQjQjRffTJ0P",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": {
+          "__rl": true,
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Table', ``, 'string') }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySqlTool",
+      "typeVersion": 2.4,
+      "position": [
+        368,
+        220
+      ],
+      "id": "cba0dd51-cc8a-4889-97e0-28f36082bbbb",
+      "name": "MySQL",
+      "credentials": {
+        "mySql": {
+          "id": "G7DZG2duwQ8jQuJG",
+          "name": "MySQL account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "67d889e7-e3a4-409c-9ff9-f707d73b923c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "259d0b4f1e3d8c8c1ce76f840de51534338c2665612e4420b2ee4a2e6908aa5c"
+  },
+  "id": "3wcxyD7qHq6boeTk",
+  "tags": []
+}
